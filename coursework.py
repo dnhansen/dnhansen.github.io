@@ -12,7 +12,7 @@ def bib_entry_format(entry_name):
     entry = literature_dict[entry_name]
     title = entry["title"]
     authors = ", ".join([author["lastname"] for author in entry["author"]])
-    entry_output = ", ".join([authors, f'<em>{title}</em>'])
+    entry_output = ", ".join([authors, f'<cite class="book">{title}</cite>'])
     return entry_output
 
 

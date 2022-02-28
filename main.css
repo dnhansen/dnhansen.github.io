@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital@0;1&display=swap');
 
-body{
+body {
   font-family: 'Crimson Pro', 'Open Sans', Arial;
   color: #454545;
   font-size: 20px;
@@ -8,7 +8,7 @@ body{
   max-width: 800px;
   padding: 1em;
   line-height: 1.4;
-  text-align: justify
+  text-align: justify;
 }
 .course {
   font-style: italic;
@@ -26,5 +26,22 @@ h2 {
 
 .IPA {
   font-family: 'Times New Roman', Times, serif;
-  color: #454545
+  color: #454545;
+}
+
+cite.book {
+  font-style: italic;
+}
+
+cite.article {
+  font-style: normal;
+}
+
+/* Articles are cited by enclosing in single curly quotes. */
+cite.article::before {
+  content: '\2018';
+}
+
+cite.article::after {
+  content: '\2019';
 }
