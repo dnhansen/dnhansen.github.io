@@ -1,0 +1,432 @@
+---
+stewartcalc:
+  type: book
+  title: Calculus
+  author:
+  - firstname: James
+    lastname: Stewart
+  year: 2006
+  publisher: Cengage Learning
+  isbn: '978-1-4080-8792-3'
+  pagetotal: 1123
+  edition: 3
+lineareks:
+  type: book
+  title: Lineær algebra via eksempler
+  author:
+  - firstname: Holger Andreas
+    lastname: Nielsen
+  - firstname: Hans Anton
+    lastname: Salomonsen
+  year: 2011
+  publisher: Aarhus Universitetsforlag
+  isbn: '978-87-7124-251-5'
+  pagetotal: 128
+  edition: 1
+boggessnarcowich:
+  type: book
+  title: A First Course in Wavelets with Fourier Analysis
+  author:
+  - firstname: Albert
+    lastname: Boggess
+  - firstname: Francis J.
+    lastname: Narcowich
+  year: 2009
+  publisher: 'John Wiley & Sons, Inc.'
+  isbn: '978-0-470-43117-7'
+  pagetotal: 315
+  edition: 2
+ebbethuepoulsen:
+  type: book
+  title: Funktioner af en og flere variable
+  author:
+  - firstname: Ebbe Thue
+    lastname: Poulsen
+  year: 2016
+  publisher: 'Institut for Matematik, Aarhus Universitet'
+  isbn: null
+  pagetotal: 407
+  edition: 1
+bergcomplex:
+  type: book
+  title: Complex Analysis
+  author:
+  - firstname: Christian
+    lastname: Berg
+  year: 2012
+  publisher: 'Copenhagen University, Lecture Notes'
+  isbn: null
+  pagetotal: 191
+  edition: null
+moellerode:
+  type: book
+  title: Ordinary Differential Equations
+  author:
+  - firstname: Jacob Schach
+    lastname: Møller
+  year: 2015
+  publisher: 'Aarhus University, Department of Mathematics'
+  isbn: null
+  pagetotal: 359
+  edition: null
+thorbjoernsenmaalteori:
+  type: book
+  title: 'Grundlæggende mål- og integralteori'
+  author:
+  - firstname: Steen
+    lastname: Thorbjørnsen
+  year: 2014
+  publisher: Aarhus Universitetsforlag
+  isbn: '978-87-7124-508-0'
+  pagetotal: 425
+  edition: 1
+rudinrealandcomplex:
+  type: book
+  title: Real and Complex Analysis
+  author:
+  - firstname: Walter
+    lastname: Rudin
+  year: 1987
+  publisher: 'McGraw-Hill'
+  isbn: '0-07-054234-1'
+  pagetotal: 416
+  edition: 3
+rudinfunctional:
+  type: book
+  title: Functional Analysis
+  author:
+  - firstname: Walter
+    lastname: Rudin
+  year: 1991
+  publisher: 'McGraw-Hill'
+  isbn: '0-07-054236-8'
+  pagetotal: 424
+  edition: 2
+johanphansen:
+  type: book
+  title: Tal og polynomier
+  author:
+  - firstname: Johan P.
+    lastname: Hansen
+  year: 1991
+  publisher: 'McGraw-Hill'
+  isbn: '0-07-054236-8'
+  pagetotal: 424
+  edition: 2
+lauritzenalgebra:
+  type: book
+  title: Concrete Abstract Algebra
+  author:
+  - firstname: Niels
+    lastname: Lauritzen
+  year: 2003
+  publisher: Cambridge University Press
+  isbn: '978-0-521-53410-9'
+  pagetotal: 240
+  edition: 1
+sutherlandtopology:
+  type: book
+  title: Introduction to Metric and Topological Spaces
+  author:
+  - firstname: Wilson A.
+    lastname: Sutherland
+  year: 2009
+  publisher: Oxford University Press
+  isbn: '978-0-19-956308-1'
+  pagetotal: 206
+  edition: 2
+docarmocurves:
+  type: book
+  title: Differential Geometry of Curves and Surfaces
+  author:
+  - firstname: Manfredo P.
+    lastname: do Carmo
+  year: 2016
+  publisher: Dover
+  isbn: '978-0-486-80699-0'
+  pagetotal: 510
+  edition: 2
+hatchertopology:
+  type: book
+  title: Algebraic Topology
+  author:
+  - firstname: Allen
+    lastname: Hatcher
+  year: 2001
+  publisher: null
+  isbn: null
+  pagetotal: 551
+  edition: null
+jensenstatistik:
+  type: book
+  title: 'Statistik – viden fra data'
+  author:
+  - firstname: Jens Ledet
+    lastname: Jensen
+  year: 2012
+  publisher: Aarhus Universitetsforlag
+  isbn: '978-87-7124-250-8'
+  pagetotal: 243
+  edition: 1
+pishronik:
+  type: book
+  title: 'Introduction to Probability, Statistics, and Random Processes'
+  author:
+  - firstname: Hossein
+    lastname: 'Pishro-Nik'
+  year: 2014
+  publisher: Kappa Research
+  isbn: '978-0-9906372-0-2'
+  pagetotal: 732
+  edition: 1
+chiharahesterberg:
+  type: book
+  title: Mathematical Statistics with Resampling and R
+  author:
+  - firstname: Laura M.
+    lastname: Chihara
+  - firstname: Tim C.
+    lastname: Hesterberg
+  year: 2019
+  publisher: Wiley
+  isbn: '9781119416524'
+  pagetotal: 537
+  edition: 2
+johansensoerensenvidteori:
+  type: book
+  title: Invitation til matematikkens videnskabsteori
+  author:
+  - firstname: Mikkel Villum
+    lastname: Johansen
+  - firstname: Henrik Kragh
+    lastname: Sørensen
+  year: 2014
+  publisher: Samfundslitteratur
+  isbn: '978-87-593-1793-8'
+  pagetotal: 265
+  edition: 1
+youngfreedman:
+  type: book
+  title: University Physics
+  author:
+  - firstname: Hugh D.
+    lastname: Young
+  - firstname: Roger A.
+    lastname: Freedman
+  year: 2016
+  publisher: Pearson
+  isbn: '978-0-321-97361-0'
+  pagetotal: 1569
+  edition: 14
+sartori:
+  type: book
+  title: Understanding Relativity
+  author:
+  - firstname: Leo
+    lastname: Sartori
+  year: 1996
+  publisher: University of California Press
+  isbn: '978-0-520-20029-6'
+  pagetotal: 367
+  edition: 1
+uggerhoej:
+  type: book
+  title: Speciel relativitetsteori
+  author:
+  - firstname: Ulrik I.
+    lastname: Uggerhøj
+  year: 2016
+  publisher: Aarhus Universitetsforlag
+  isbn: '978-87-7184-233-3'
+  pagetotal: 319
+  edition: 1
+rydenpetersonastro:
+  type: book
+  title: Foundations of Astrophysics
+  author:
+  - firstname: Barbara
+    lastname: Ryden
+  - firstname: Bradley M.
+    lastname: Peterson
+  year: 2010
+  publisher: Pearson
+  isbn: '978-0-321-59558-4'
+  pagetotal: 388
+  edition: 1
+griffithsquantum:
+  type: book
+  title: Introduction to Quantum Mechanics
+  author:
+  - firstname: David J.
+    lastname: Griffiths
+  year: 2005
+  publisher: Pearson
+  isbn: '0-13-191175-9'
+  pagetotal: 468
+  edition: 2
+taylormechanics:
+  type: book
+  title: Classical Mechanics
+  author:
+  - firstname: John R.
+    lastname: Taylor
+  year: 2005
+  publisher: University Science Books
+  isbn: '1-891389-22-X'
+  pagetotal: 786
+  edition: 1
+footatomic:
+  type: book
+  title: Atomic Physics
+  author:
+  - firstname: Christopher J.
+    lastname: Foot
+  year: 2005
+  publisher: Oxford University Press
+  isbn: '0-19-850696-1'
+  pagetotal: 331
+  edition: 1
+demtroder:
+  type: book
+  title: 'Atoms, Molecules and Photons'
+  author:
+  - firstname: Wolfgang
+    lastname: Demtröder
+  year: 2010
+  publisher: Springer
+  isbn: '978-3-642-10297-4'
+  pagetotal: 589
+  edition: 2
+griffithselectro:
+  type: book
+  title: Introduction to Electrodynamics
+  author:
+  - firstname: David J.
+    lastname: Griffiths
+  year: 2013
+  publisher: Pearson
+  isbn: '978-0-321-85656-2'
+  pagetotal: 599
+  edition: 4
+guttagpython:
+  type: book
+  title: Introduction to Computation and Programming Using Python
+  author:
+  - firstname: John V.
+    lastname: Guttag
+  year: 2016
+  publisher: The MIT Press
+  isbn: '9780262529624'
+  pagetotal: 447
+  edition: 2
+christensenFRS:
+  type: book
+  title: Flexible and Reliable Software
+  author:
+  - firstname: Henrik Bærbak
+    lastname: Christensen
+  year: null
+  publisher: null
+  isbn: null
+  pagetotal: null
+  edition: 2
+christensenFRDS:
+  type: book
+  title: 'Flexible, Reliable, Distributed Software'
+  author:
+  - firstname: Henrik Bærbak
+    lastname: Christensen
+  year: 2020
+  publisher: Leanpub
+  isbn: null
+  pagetotal: 113
+  edition: 2
+clrs:
+  type: book
+  title: Introduction to Algorithms
+  author:
+  - firstname: Thomas H.
+    lastname: Cormen
+  - firstname: Charles E.
+    lastname: Leiserson
+  - firstname: Ronald L.
+    lastname: Rivest
+  - firstname: Clifford
+    lastname: Stein
+  year: 2009
+  publisher: The MIT Press
+  isbn: '978-0-262-53305-8'
+  pagetotal: 1292
+  edition: 3
+martincomputation:
+  type: book
+  title: Introduction to Languages and the Theory of Computation
+  author:
+  - firstname: John C.
+    lastname: Martin
+  year: 2011
+  publisher: 'McGraw-Hill'
+  isbn: '978–0–07–319146–1'
+  pagetotal: 436
+  edition: 4
+huthryanlogic:
+  type: book
+  title: Logic in Computer Science
+  author:
+  - firstname: Michael
+    lastname: Huth
+  - firstname: Mark
+    lastname: Ryan
+  year: 2004
+  publisher: Cambridge University Press
+  isbn: '978-0-511-26401-6'
+  pagetotal: 427
+  edition: 2
+tanenbaumaustin:
+  type: book
+  title: Structured Computer Organization
+  author:
+  - firstname: Andrew S.
+    lastname: Tanenbaum
+  - firstname: Todd
+    lastname: Austin
+  year: 2013
+  publisher: Pearson
+  isbn: '978-0-13-291652-3'
+  pagetotal: 775
+  edition: 6
+hailperinOS:
+  type: book
+  title: Operating Systems and Middleware
+  author:
+  - firstname: Max
+    lastname: Hailperin
+  year: 2019
+  publisher: null
+  isbn: null
+  pagetotal: 539
+  edition: 1.3.1
+dordalnetworks:
+  type: book
+  title: Introduction to Computer Networks
+  author:
+  - firstname: Peter L.
+    lastname: Dordal
+  year: 2020
+  publisher: null
+  isbn: null
+  pagetotal: 886
+  edition: 1.9.21
+elmasrinavathe:
+  type: book
+  title: Fundamentals of Database Systems
+  author:
+  - firstname: Ramez
+    lastname: Elmasri
+  - firstname: Shamkant B.
+    lastname: Navathe
+  year: 2016
+  publisher: Pearson
+  isbn: '978-0-13-397077-7'
+  pagetotal: 1242
+  edition: 7

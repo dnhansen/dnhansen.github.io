@@ -1,0 +1,23 @@
+{
+  "index" :
+    {
+      "title" : "Danny Nygård Hansen",
+      "css" : [
+        "main.css"
+      ],
+      "headPath" : null,
+      "bodyPath" : "index_body.html",
+      "filename" : "index.html"
+    },
+  "coursework" :
+    {
+      "title" : "Coursework",
+      "css" : [
+        "main.css",
+        "coursework.css"
+      ],
+      "headPath" : "coursework_head.html",
+      "bodyPath" : "coursework_body.html",
+      "filename" : "coursework.html"
+    }
+}
