@@ -24,6 +24,10 @@ h2 {
   padding-top: 10px;
 }
 
+q {
+  quotes: "‘" "’" "“" "”";
+}
+
 .IPA {
   font-family: 'Times New Roman', Times, serif;
   color: #454545;
@@ -35,13 +39,14 @@ cite.book {
 
 cite.article {
   font-style: normal;
+  quotes: "‘" "’" "“" "”";
 }
 
 /* Articles are cited by enclosing in single curly quotes. */
 cite.article::before {
-  content: '\2018';
+  content: open-quote;
 }
 
 cite.article::after {
-  content: '\2019';
+  content: close-quote;
 }
