@@ -1,0 +1,9 @@
+.note-list dd {
+    display: list-item;
+    list-style-type: disc;
+}
+
+.note-list dt {
+    font-style: italic;
+    margin-top: 10px;
+}

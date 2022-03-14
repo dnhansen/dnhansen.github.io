@@ -3,7 +3,8 @@
     {
       "title" : "Danny Nygård Hansen",
       "css" : [
-        "main.css"
+        "main.css",
+        "index.css"
       ],
       "headPath" : null,
       "bodyPath" : "index_body.html",
