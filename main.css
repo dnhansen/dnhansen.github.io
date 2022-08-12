@@ -1,21 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital@0;1&display=swap');
 
+:root {
+  /* Text */
+  --serif-font: 'Crimson Pro';
+  --sans-serif-font: 'Open Sans', Arial;
+  --body-font-size: 20px;
+  
+  /* Colours */
+  --bg: #FFF;
+  --text: #454545;
+  --header-bg: #EEE;
+  --header-text: #777;
+  --title-color: #61496B;
+  --border: #D8DAE1;
+  --footer-text: #CCC;
+  --link-color: #4f4fa3;
+}
+
 body {
-  font-family: 'Crimson Pro', 'Open Sans', Arial;
-  color: #454545;
-  font-size: 20px;
-  margin: 2em auto;
-  max-width: 800px;
-  padding: 1em;
+  font-family: var(--serif-font), var(--sans-serif-font);
+  color: var(--text);
+  font-size: var(--body-font-size);
+  background: var(--bg);
   line-height: 1.4;
   text-align: justify;
+  margin: 0 auto;
+  max-width: 45rem;
+  padding: 0 .5rem;
+  overflow-x: hidden;
 }
+
+header {
+  color: var(--header-text);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: 2rem .5rem;
+  width: 100vw;
+  position: relative;
+  box-sizing: border-box;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+header h1, header p {
+  margin: 0; 
+}
+
+header h1 {
+  color: var(--title-color);
+}
+
+header a, header a:visited {
+  text-decoration: none;
+  color: var(--header-text);
+}
+
+footer {
+  margin-top: 3rem;
+  padding: 1rem 1rem 2rem 1rem;
+  color: var(--footer-text);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
 .course {
   font-style: italic;
 }
 
 a {
-  color: #4f4fa3;
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -26,11 +82,6 @@ h2 {
 
 q {
   quotes: "‘" "’" "“" "”";
-}
-
-.IPA {
-  font-family: 'Times New Roman', Times, serif;
-  color: #454545;
 }
 
 cite.book {

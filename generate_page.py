@@ -2,7 +2,6 @@ import json
 import textwrap
 import sys
 
-
 # FUNCTIONS
 
 def format_element(page_info, element):
@@ -35,7 +34,7 @@ if __name__ == '__main__':
     # Indentation
     css_indent = '    '
     head_indent = '    '
-    body_indent = '    '
+    body_indent = '      '
 
     # I/O
     with open('page_template.html', encoding=encoding) as template_file:
@@ -51,11 +50,15 @@ if __name__ == '__main__':
     css = format_list(page_info, 'css', '{indent}<link rel="stylesheet" type="text/css" href="/{element}">', css_indent)
     head = format_file(page_info, 'headPath', encoding, head_indent)
     body = format_file(page_info, 'bodyPath', encoding, body_indent)
+    with open('header.html', encoding=encoding) as header_file:
+        header = ''.join(row for row in header_file)
+    header = textwrap.indent(header, body_indent)
+    with open('footer.html', encoding=encoding) as footer_file:
+        footer = ''.join(row for row in footer_file)
+    footer = textwrap.indent(footer, body_indent)
 
     # Format and save
-    formatted_page = template.format(title=title, head=head, css=css, body=body)
+    formatted_page = template.format(title=title, head=head, css=css, main=body, header=header, footer=footer)
 
     with open(page_info['filename'], 'w', encoding=encoding) as f:
         f.write(formatted_page)
-
-
