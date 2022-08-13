@@ -11,10 +11,10 @@
   --text: #454545;
   --header-bg: #EEE;
   --header-text: #777;
-  --title-color: #61496B;
+  --title-color: #683e3e;
   --border: #D8DAE1;
   --footer-text: #CCC;
-  --link-color: #4f4fa3;
+  --link-color: #A91616;
 }
 
 body {
@@ -80,6 +80,10 @@ h2 {
   padding-top: 10px;
 }
 
+h2, h3 {
+  color: var(--header-text);
+}
+
 q {
   quotes: "‘" "’" "“" "”";
 }
@@ -109,6 +113,11 @@ cite.article::after {
   top: 128pt;
   background-color: var(--header-bg);
   border: 1pt solid var(--border);
-  width: 150pt;
-  padding-right: 20pt;
+  width: 160pt;
+  color: var(--header-text);
+}
+
+#toc h2 {
+  text-align: center;
+  font-size: var(--body-font-size);
 }
