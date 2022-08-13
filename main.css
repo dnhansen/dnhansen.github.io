@@ -101,3 +101,14 @@ cite.article::before {
 cite.article::after {
   content: close-quote;
 }
+
+/* Table of contents */
+#toc {
+  position: fixed;
+  right: 15pt;
+  top: 128pt;
+  background-color: var(--header-bg);
+  border: 1pt solid var(--border);
+  width: 150pt;
+  padding-right: 20pt;
+}

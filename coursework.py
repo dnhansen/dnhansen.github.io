@@ -101,6 +101,10 @@ current_area = None
 output = []
 indent = '  '
 
+# For TOC
+area_list = []
+area_id_list = []
+
 for idx, d in enumerate(sorted_list):
     course = d['English']
     hidden = d['Hidden']
@@ -112,6 +116,7 @@ for idx, d in enumerate(sorted_list):
         continue
 
     area = d['Area']
+    area_id = area.replace(' ', '_')
     year = int(d['Year'])
     semester = d['Semester']
     grade = d['Grade']
@@ -122,8 +127,12 @@ for idx, d in enumerate(sorted_list):
 
     if current_area != area:
         current_area = area
-        output.append(f'<h3>{area}</h3>')
-        output.append('<ul>')
+        output.append(f'<h3 id="{area_id}">{area}</h3>')
+        output.append('<ul class="course_list">')
+        # For TOC
+        area_list.append(area)
+        area_id_list.append(area_id)
+
 
     output.append(f'{indent}<li style="--grade: \'{grade_format}\'">')
     output.append(f'{2*indent}<span class="course">{course}</span><span class="time">{semester} {year}</span>')
@@ -147,6 +156,23 @@ for idx, d in enumerate(sorted_list):
         current_area = area
 
 output = '\n'.join(output)
+
+# Build TOC
+
+toc = []
+toc.append('<div id="toc">')
+toc.append(f'{indent}<ol>')
+
+for i in range(len(area_list)):
+    toc.append(f'{2*indent}<li><a href="#{area_id_list[i]}">{area_list[i]}</a></li>')
+
+toc.append(f'{indent}</ol>')
+toc.append('</div>')
+
+toc = '\n'.join(toc)
+output = toc + '\n' + output
+
+# Write output
 
 with open('coursework_body.html', 'w', encoding='utf-8') as f:
     f.write(output)

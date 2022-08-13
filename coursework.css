@@ -12,11 +12,11 @@
   font-size: 16px;
 }
 
-ul {
+ul.course_list {
   list-style-type: none;
 }
 
-ul li:before {
+ul.course_list li:before {
   content: var(--grade);
   margin-right: 5px;
   position: absolute;
@@ -25,7 +25,7 @@ ul li:before {
   font-style: italic;
 }
 
-li:not(:last-child) {
+.course_list li:not(:last-child) {
   margin-bottom: 15px;
 }
 
