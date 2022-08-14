@@ -161,10 +161,11 @@ output = '\n'.join(output)
 
 toc = []
 toc.append('<div id="toc">')
+toc.append(f'{indent}<h2>Contents</h2>')
 toc.append(f'{indent}<ol>')
 
 for i in range(len(area_list)):
-    toc.append(f'{2*indent}<li><a href="#{area_id_list[i]}">{area_list[i]}</a></li>')
+    toc.append(f'{2*indent}<li><a href="#{area_id_list[i]}" class="toclink">{area_list[i]}</a></li>')
 
 toc.append(f'{indent}</ol>')
 toc.append('</div>')

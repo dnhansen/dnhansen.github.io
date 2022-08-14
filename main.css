@@ -7,14 +7,14 @@
   --body-font-size: 20px;
   
   /* Colours */
-  --bg: #FFF;
+  --bg: #ffffff;
   --text: #454545;
-  --header-bg: #EEE;
-  --header-text: #777;
+  --header-bg: #eeeeee;
+  --header-text: #777777;
   --title-color: #683e3e;
-  --border: #D8DAE1;
-  --footer-text: #CCC;
-  --link-color: #A91616;
+  --border: #d8dae1;
+  --footer-text: #aeaeae;
+  --link-color: #a91616;
 }
 
 body {
@@ -120,4 +120,8 @@ cite.article::after {
 #toc h2 {
   text-align: center;
   font-size: var(--body-font-size);
+}
+
+.toclink.active {
+  font-weight: bold;
 }

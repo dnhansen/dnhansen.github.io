@@ -11,12 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/main.css">
     <link rel="stylesheet" type="text/css" href="/index.css">
+    <script src="jquery.js"></script>
+    <script src="toc.js"></script>
   </head>
     
   <body>
     <header>
       <h1>Danny Nygård Hansen</h1>
-      <p>
+      <div>
           <a href="/">Home</a>
           <span style="padding: 0 6pt">&bull;</span>
           <a href="/coursework.html">Coursework</a>
@@ -24,19 +26,20 @@
           <a href="https://github.com/dnhansen">Github</a>
           <span style="padding: 0 6pt">&bull;</span>
           <a href="https://www.linkedin.com/in/dnhansen/">LinkedIn</a>
-      </p>
+      </div>
     </header>
-    <div id="toc">
-      <h2>Contents</h2>
-      <ol>
-        <li><a href="#About">About</a></li>
-        <li><a href="#Education">Education</a></li>
-        <li><a href="#Teaching">Teaching</a></li>
-        <li><a href="#Notes">Notes</a></li>
-        <li><a href="#Contact">Contact</a></li>
-      </ol>
-    </div>
     <main>
+      <div id="toc">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#About" class="toclink">About</a></li>
+          <li><a href="#Education" class="toclink">Education</a></li>
+          <li><a href="#Teaching" class="toclink">Teaching</a></li>
+          <li><a href="#Notes" class="toclink">Notes</a></li>
+          <li><a href="#Contact" class="toclink">Contact</a></li>
+        </ol>
+      </div>
+
       <h2 id="About">About</h2>
       <p>
         I recently received my BSc in mathematics from Aarhus University, Denmark, and now I&rsquo;m doing computer science. I don&rsquo;t really know why this page exists. If you stumble upon it somehow, send me an email and let me know that this page sent you!

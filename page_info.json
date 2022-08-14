@@ -6,6 +6,10 @@
         "main.css",
         "index.css"
       ],
+      "script" : [
+        "jquery.js",
+        "toc.js"
+      ],
       "headPath" : null,
       "bodyPath" : "index_body.html",
       "filename" : "index.html"
@@ -16,6 +20,10 @@
       "css" : [
         "main.css",
         "coursework.css"
+      ],
+      "script" : [
+        "jquery.js",
+        "toc.js"
       ],
       "headPath" : "coursework_head.html",
       "bodyPath" : "coursework_body.html",

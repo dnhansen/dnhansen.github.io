@@ -32,7 +32,6 @@ if __name__ == '__main__':
     encoding = 'utf-8'
 
     # Indentation
-    css_indent = '    '
     head_indent = '    '
     body_indent = '      '
 
@@ -47,7 +46,8 @@ if __name__ == '__main__':
 
     # Content
     title = format_element(page_info, 'title')
-    css = format_list(page_info, 'css', '{indent}<link rel="stylesheet" type="text/css" href="/{element}">', css_indent)
+    css = format_list(page_info, 'css', '{indent}<link rel="stylesheet" type="text/css" href="/{element}">', head_indent)
+    script = format_list(page_info, 'script', '{indent}<script src="{element}"></script>', head_indent)
     head = format_file(page_info, 'headPath', encoding, head_indent)
     body = format_file(page_info, 'bodyPath', encoding, body_indent)
     with open('header.html', encoding=encoding) as header_file:
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     footer = textwrap.indent(footer, body_indent)
 
     # Format and save
-    formatted_page = template.format(title=title, head=head, css=css, main=body, header=header, footer=footer)
+    formatted_page = template.format(title=title, head=head, css=css, script=script, main=body, header=header, footer=footer)
 
     with open(page_info['filename'], 'w', encoding=encoding) as f:
         f.write(formatted_page)
