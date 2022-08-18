@@ -1,4 +1,4 @@
-import json
+import yaml
 import textwrap
 import sys
 
@@ -39,8 +39,10 @@ if __name__ == '__main__':
     with open('page_template.html', encoding=encoding) as template_file:
         template = ''.join(row for row in template_file)
 
-    with open('page_info.json', encoding=encoding) as json_page_info:
-        page_dict = json.load(json_page_info)
+    with open('page_info.yaml', encoding=encoding) as yaml_page_info:
+        # We trust the input, but we don't need the full power of
+        # yaml.FullLoader, so we just use yaml.SafeLoader.
+        page_dict = yaml.load(yaml_page_info, yaml.SafeLoader)
 
     page_info = page_dict[page]
 
