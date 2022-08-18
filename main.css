@@ -125,3 +125,9 @@ cite.article::after {
 .toclink.active {
   font-weight: bold;
 }
+
+@media print {
+  #toc {
+    display: none;
+  }
+}
