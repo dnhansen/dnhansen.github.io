@@ -102,6 +102,23 @@ rudinfunctional:
   isbn: '0-07-054236-8'
   pagetotal: 424
   edition: 2
+raostetkaerfournaismoeller:
+  type: book
+  title: 'Complex Analysis: An Invitation'
+  author:
+  - firstname: Murali
+    lastname: Rao
+  - firstname: Henrik
+    lastname: Stetkær
+  - firstname: Søren
+    lastname: Fournais
+  - firstname: Jacob Schach
+    lastname: Møller
+  year: 2015
+  publisher: World Scientific
+  isbn: '978-9814579599'
+  pagetotal: 414
+  edition: 2
 johanphansen:
   type: book
   title: Tal og polynomier
@@ -124,6 +141,17 @@ lauritzenalgebra:
   isbn: '978-0-521-53410-9'
   pagetotal: 240
   edition: 1
+awodey:
+  type: book
+  title: Category Theory
+  author:
+  - firstname: Steve
+    lastname: Awodey
+  year: 2010
+  publisher: Oxford University Press
+  isbn: '978-0-19-923718-0'
+  pagetotal: 311
+  edition: 2
 sutherlandtopology:
   type: book
   title: Introduction to Metric and Topological Spaces
@@ -366,7 +394,7 @@ martincomputation:
     lastname: Martin
   year: 2011
   publisher: 'McGraw-Hill'
-  isbn: '978–0–07–319146–1'
+  isbn: '978-0-07-319146-1'
   pagetotal: 436
   edition: 4
 huthryanlogic:
@@ -417,6 +445,19 @@ dordalnetworks:
   isbn: null
   pagetotal: 886
   edition: 1.9.21
+kuroserossnetworks:
+  type: book
+  title: 'Computer Networking: A Top-Down Approach'
+  author:
+  - firstname: James F.
+    lastname: Kurose
+  - firstname: Keith W.
+    lastname: Ross
+  year: 2020
+  publisher: Pearson
+  isbn: 0136681557
+  pagetotal: 764
+  edition: 8
 elmasrinavathe:
   type: book
   title: Fundamentals of Database Systems
