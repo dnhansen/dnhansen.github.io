@@ -7,7 +7,7 @@ index:
   script:
   - jquery.js
   - toc.js
-  headPath: null
+  headPath: index_head.html
   bodyPath: index_body.html
   filename: index.html
 coursework:
