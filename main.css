@@ -131,3 +131,7 @@ cite.article::after {
     display: none;
   }
 }
+
+.MathJax {
+  font-size: 0.9em !important;
+}
