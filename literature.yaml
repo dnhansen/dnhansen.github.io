@@ -471,3 +471,36 @@ elmasrinavathe:
   isbn: '978-0-13-397077-7'
   pagetotal: 1242
   edition: 7
+friedmanwand:
+  type: book
+  title: Essentials of Programming Languages
+  author:
+  - firstname: Daniel P.
+    lastname: Friedman
+  - firstname: Mitchell
+    lastname: Wand
+  year: 2008
+  publisher: MIT Press
+  isbn: 978-0-262-06279-4
+  pagetotal: 410
+  edition: 3
+sestoftproglang:
+  type: book
+  title: Programming Language Concepts
+  author:
+  - firstname: Peter
+    lastname: Sestoft
+  year: 2017
+  publisher: Springer
+  isbn: 978-3-319-60788-7
+  pagetotal: 341
+  edition: 2
+fultoncurves:
+  type: book
+  title: Algebraic Curves
+  author:
+  - firstname: William
+    lastname: Fulton
+  year: 2008
+  pagetotal: 121
+  edition: 3
