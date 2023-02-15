@@ -4,6 +4,17 @@
 }
 
 .note-list dt {
-    font-style: italic;
+    font-family: var(--sans-serif-font);
+    font-weight: bold;
     margin-top: 10px;
+}
+
+#education_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#education_list li {
+        margin: 10px 0;
 }

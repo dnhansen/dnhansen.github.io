@@ -1,20 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital@0;1&display=swap');
 
 :root {
   /* Text */
   --serif-font: 'Crimson Pro';
-  --sans-serif-font: 'Open Sans', Arial;
+  --sans-serif-font: 'Alegreya Sans', 'Open Sans', Arial;
   --body-font-size: 20px;
   
   /* Colours */
   --bg: #ffffff;
-  --text: #454545;
+  --text: black, #454545;
   --header-bg: #eeeeee;
-  --header-text: #777777;
-  --title-color: #683e3e;
+  --header-text: black, #777777;
+  --title-color: #3c78d8; /* #683e3e; */
   --border: #d8dae1;
   --footer-text: #aeaeae;
-  --link-color: #a91616;
+  --link-color: #3c78d8; /* #a91616;*/
 }
 
 body {
@@ -31,6 +32,7 @@ body {
 }
 
 header {
+  font-family: var(--sans-serif-font);
   color: var(--header-text);
   background: var(--header-bg);
   border-bottom: 1px solid var(--border);
@@ -81,7 +83,9 @@ h2 {
 }
 
 h2, h3 {
+  font-family: var(--sans-serif-font);
   color: var(--header-text);
+  font-size: 20pt;
 }
 
 q {

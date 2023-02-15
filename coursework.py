@@ -62,7 +62,8 @@ def area_ordering(s):
              'Physics',
              'Programming',
              'Theoretical CS',
-             'Misc CS')
+             'Misc CS',
+             'EE')
     return order.index(s)
 
 
@@ -101,6 +102,13 @@ current_area = None
 output = []
 indent = '  '
 
+## Initial text
+
+init_text = """<p>
+  The letter next to the course name indicates the grade I received for the course. A &lsquo;P&rsquo; indicates a pass. An asterisk indicates that I audited the course and did not receive a grade.
+</p>"""
+output.append(init_text)
+
 # For TOC
 area_list = []
 area_id_list = []
@@ -119,6 +127,7 @@ for idx, d in enumerate(sorted_list):
     area_id = area.replace(' ', '_')
     year = int(d['Year'])
     semester = d['Semester']
+    institution = d['Institution']
     grade = d['Grade']
     grade_format = grade if d['Ordinary'] == 'Yes' else '*'
     if grade_format == "Pass":
@@ -127,7 +136,7 @@ for idx, d in enumerate(sorted_list):
 
     if current_area != area:
         current_area = area
-        output.append(f'<h3 id="{area_id}">{area}</h3>')
+        output.append(f'<h2 id="{area_id}">{area}</h2>')
         output.append('<ul class="course_list">')
         # For TOC
         area_list.append(area)
@@ -135,7 +144,13 @@ for idx, d in enumerate(sorted_list):
 
 
     output.append(f'{indent}<li style="--grade: \'{grade_format}\'">')
-    output.append(f'{2*indent}<span class="course">{course}</span><span class="time">{semester} {year}</span>')
+    # output.append(f'{2*indent}<span class="course">{course}</span><span class="time">{semester} {year}</span>')
+    output.append(f'{2*indent}<div class="course">{course}</div>')
+    output.append(f'{2*indent}<div class="time_and_place">')
+    output.append(f'{3*indent}<span>{semester} {year}</span>')
+    output.append(f'{3*indent}<span style="padding: 0 3pt">&bull;</span>')
+    output.append(f'{3*indent}<span>{institution}</span>')
+    output.append(f'{2*indent}</div>')
 
     # Course description
     output.append(f'{2*indent}<div class="description">{description}</div>')

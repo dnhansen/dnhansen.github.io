@@ -495,12 +495,36 @@ sestoftproglang:
   isbn: 978-3-319-60788-7
   pagetotal: 341
   edition: 2
-fultoncurves:
+goetzjavaconcurrency:
   type: book
-  title: Algebraic Curves
+  title: Java Concurrency in Practice
   author:
-  - firstname: William
-    lastname: Fulton
-  year: 2008
-  pagetotal: 121
-  edition: 3
+  - firstname: Brian
+    lastname: Goetz
+  year: 2006
+  publisher: Pearson
+  isbn: 0-321-34960-1
+  pagetotal: 403
+  edition: 1
+montesichoreographies:
+  type: book
+  title: Introduction to Choreographies
+  author:
+  - firstname: Fabrizio
+    lastname: Montesi
+  year: 2019
+  pagetotal: 109
+  edition: 1
+manocilettidigitaldesign:
+  type: book
+  title: 'Digital Design: With an Introduction to the Verilog HDL, VHDL, and SystemVerilog'
+  author:
+  - firstname: M. Morris
+    lastname: Mano
+  - firstname: Michael D.
+    lastname: Ciletti
+  year: 2019
+  publisher: Pearson
+  isbn: '978-1-292-23116-7'
+  pagetotal: 710
+  edition: 6

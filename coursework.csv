@@ -48,5 +48,9 @@ Computer Architecture, Networks and Operating Systems;Computerarkitektur, netvæ
 Human–Computer Interaction;Human–Computer Interaction;10;;2022;Autumn;Aarhus University;Computer Science;Computer Science BSc;Yes;Misc CS;;TODO;;;
 Distributed Systems and Security;Distribuerede systemer og sikkerhed;10;;2022;Autumn;Aarhus University;Computer Science;Computer Science BSc;Yes;Misc CS;;TODO;;;
 Programming Languages;Programmeringssprog;10;;2023;Spring;Aarhus University;Computer Science;Computer Science BSc;Yes;Misc CS;;!friedmanwand, !sestoftproglang, Lecture notes;;;
-Algebraic Curves;Algebraiske kurver;5;;2023;Spring;Aarhus University;Mathematics;;No;Algebra;;!fultoncurves;;;
-Homological Algebra;Homologisk algebra;5;;2023;Spring;Aarhus University;Mathematics;;No;Algebra;;TODO;;;
+Advanced Algebra;Videregående algebra;10;;2022;Autumn;Aarhus University;Mathematics;;No;Algebra;;Lecture notes;;;
+Concurrent Programming;Concurrent Programming;;;2023;Spring;University of Southern Denmark;;;No;Misc CS;;!goetzjavaconcurrency;;;
+Concurrency Theory;Concurrency Theory;;;2023;Autumn;University of Southern Denmark;;;No;Misc CS;;!montesichoreographies;;;
+Compilation;Oversættelse;10;;2023;Autumn;Aarhus University;;;No;Misc CS;;TODO;;;
+Digital Circuits;Digitale kredsløb;5;;2022;Autumn;Aarhus University;;;No;EE;;!manocilettidigitaldesign;;;
+Mathematical Statistics;Matematisk statistik;15;;2022;Spring;University of Copenhagen;;;No;Statistics;;TODO;;;
