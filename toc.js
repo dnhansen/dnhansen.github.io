@@ -1,6 +1,6 @@
 $(window).on('load', function(){
     var win = $(window);
-    var links = $('.toclink');    
+    var links = $('.navlink');    
     var anchors = links.map(function(){
         var anchorname = $(this).attr("href").substr(1);
         var a = $("[id='" + anchorname + "']");

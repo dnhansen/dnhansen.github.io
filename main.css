@@ -1,91 +1,222 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital@0;1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital@0;1&display=swap');
+/* GENERAL */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-  /* Text */
-  --serif-font: 'Crimson Pro';
-  --sans-serif-font: 'Alegreya Sans', 'Open Sans', Arial;
-  --body-font-size: 20px;
+  /* Typefaces */
+  --font-main: 'JetBrains Mono';
+  
+  /* Font sizes */
+  --font-size-regular: 14px;
+  --font-size-small: 12px;
+  --font-size-header: var(--font-size-small);
+  --font-size-title: 24px;
+  --font-size-footer: var(--font-size-small);
+  --font-size-h2: var(--font-size-title);
+  --font-size-h3: 18px;
+  --font-size-h4: 14px;
+  --font-size-nav-title: 16px;
+  --font-size-nav1: var(--font-size-regular);
+  --font-size-nav2: var(--font-size-small);
   
   /* Colours */
-  --bg: #ffffff;
-  --text: black, #454545;
-  --header-bg: #eeeeee;
-  --header-text: black, #777777;
-  --title-color: #3c78d8; /* #683e3e; */
-  --border: #d8dae1;
-  --footer-text: #aeaeae;
-  --link-color: #3c78d8; /* #a91616;*/
+  --color-background: #1d1f21;
+  --color-text: #c9cacc;
+  --color-link: #2bbc8a;
+  --color-header-text: var(--color-link);
+  --color-header-link: var(--color-link);
+  --color-title: var(--color-text);
+  --color-h2: var(--color-link);
+  --color-h3: white;
+  --color-h4: var(--color-h3);
+  --color-nav-title: var(--color-h2);
+  --color-nav-link1: var(--color-text);
+  --color-nav-link2: var(--color-footer-link);
+  --color-nav-active: white;
+  --color-footer-text: #666666;
+  --color-footer-link: var(--color-footer-text);
+  --color-hash: #145d43;
 }
+
+html{
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%)); /* https://stackoverflow.com/a/39289453/2578065 */
+}
+
+
+/* BODY */
 
 body {
-  font-family: var(--serif-font), var(--sans-serif-font);
-  color: var(--text);
-  font-size: var(--body-font-size);
-  background: var(--bg);
-  line-height: 1.4;
-  text-align: justify;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  font-size: var(--font-size-regular);
+  background: var(--color-background);
+  line-height: 1.7;
+  text-align: left;
   margin: 0 auto;
-  max-width: 45rem;
+  max-width: 42rem;
   padding: 0 .5rem;
-  overflow-x: hidden;
-}
-
-header {
-  font-family: var(--sans-serif-font);
-  color: var(--header-text);
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-  padding: 2rem .5rem;
-  width: 100vw;
-  position: relative;
-  box-sizing: border-box;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-header h1, header p {
-  margin: 0; 
-}
-
-header h1 {
-  color: var(--title-color);
-}
-
-header a, header a:visited {
-  text-decoration: none;
-  color: var(--header-text);
-}
-
-footer {
-  margin-top: 3rem;
-  padding: 1rem 1rem 2rem 1rem;
-  color: var(--footer-text);
-  text-align: center;
-  border-top: 1px solid var(--border);
-}
-
-.course {
-  font-style: italic;
 }
 
 a {
-  color: var(--link-color);
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* HEADER */
+
+header {
+  font-size: var(--font-size-header);
+  color: var(--color-header-text);
+  text-align: left;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}
+
+header h1 {
+  font-size: var(--font-size-title);
+  color: var(--color-title);
+  margin: 0;
+}
+
+header a, header a:visited {
+  color: var(--color-header-link);
+}
+
+header ul {
+  padding: 0;
+  margin: 0;
+}
+
+header li {
+  display: inline;
+}
+
+header li + li:before{
+  content: " | ";
+  padding: 0 5px;
+}
+
+
+/* NAV */
+
+nav {
+  position: fixed;
+  right: 33px;
+  top: 120px;
+  width: 216px;
+  text-align: right;
+  font-size: var(--font-size-nav1);
+}
+
+nav h2 {
+  text-align: right;
+  font-size: var(--font-size-nav-title);
+  color: var(--color-nav-title);
+}
+
+nav a {
+  color: var(--color-nav-link1);
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  line-height: 1.5;
+}
+
+nav ul li a:before {
+  content: "#";
+  color: var(--color-header-text);
+  position: absolute;
+  margin-left: -13px;
+  /* margin-top: 2px; */
+}
+
+nav ul li ul li {
+  line-height: 1.4;
+}
+
+nav ul li ul li a {
+  font-size: var(--font-size-nav2);
+  color: var(--color-footer-text);
+}
+
+nav ul li ul li a:before {
+  content: "•";
+  font-size: var(--font-size-nav1);
+  color: var(--color-header-text);
+  position: absolute;
+  margin-left: -11px;
+  margin-top: 1px;
+}
+
+.navlink.active {
+  font-weight: bold;
+  color: var(--color-nav-active);
+}
+
+
+/* MAIN */
+
+a {
+  color: var(--color-link);
+}
+
 h2 {
+  font-size: var(--font-size-h2);
+  font-weight: bold;
+  color: var(--color-h2);
   line-height: 20px;
   padding-top: 10px;
 }
 
-h2, h3 {
-  font-family: var(--sans-serif-font);
-  color: var(--header-text);
-  font-size: 20pt;
+h2 a {
+  color: var(--color-header-text);
+  text-decoration: none;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: bold;
+  color: var(--color-h3);
+}
+
+h3 a {
+  color: var(--color-h3);
+}
+
+h3 a:hover:before {
+  color: var(--color-header-text);
+  content: "#";
+  position: absolute;
+  margin-left: -14px;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-weight: bold;
+  font-style: italic;
+  color: var(--color-h4);
+}
+
+h4 a {
+  color: var(--color-h4);
+}
+
+h4 a:hover:before {
+  content: "#";
+  font-style: normal;
+  color: var(--color-header-text);
+  position: absolute;
+  margin-left: -11px;
 }
 
 q {
@@ -110,32 +241,55 @@ cite.article::after {
   content: close-quote;
 }
 
-/* Table of contents */
-#toc {
-  position: fixed;
-  right: 15pt;
-  top: 128pt;
-  background-color: var(--header-bg);
-  border: 1pt solid var(--border);
-  width: 160pt;
-  color: var(--header-text);
-}
-
-#toc h2 {
-  text-align: center;
-  font-size: var(--body-font-size);
-}
-
-.toclink.active {
-  font-weight: bold;
+.course {
+  font-style: italic;
 }
 
 @media print {
-  #toc {
+  nav {
     display: none;
   }
 }
 
 .MathJax {
-  font-size: 0.9em !important;
+  font-size: 1.2em !important;
+}
+
+code {
+  font-family: var(--font-main);
+  color: var(--color-link);
+}
+
+pre {
+  margin: 20px 30px;
+  padding: 0px 10px;
+  white-space: pre-line;
+  border-style: none none none solid;
+  border-color: var(--color-link);
+}
+
+pre > code > span {
+  white-space: pre;
+}
+
+
+/* FOOTER */
+
+footer {
+  font-size: var(--font-size-footer);
+  color: var(--color-footer-text);
+  margin-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+footer a {
+  color: var(--color-footer-link);
+}
+
+.footer-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
 }

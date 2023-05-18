@@ -53,17 +53,25 @@ def sort_ordinary(s):
         return 1
 
 
+def subject_ordering(s):
+    order = ('Mathematics',
+             'Physics',
+             'Computer science',
+             'Electrical engineering')
+    return order.index(s)
+
+
 def area_ordering(s):
     order = ('Analysis',
              'Algebra',
              'Geometry',
              'Statistics',
-             'Misc mathematics',
-             'Physics',
+             'Miscellaneous mathematics',
              'Programming',
-             'Theoretical CS',
-             'Misc CS',
-             'EE')
+             'Theoretical computer science',
+             'Miscellaneous computer science',
+             'Electrical engineering',
+             '')
     return order.index(s)
 
 
@@ -89,29 +97,31 @@ for row in range(1, len(data)):
     d = {keys[col]: data[row][col] for col in range(len(keys))}
     dict_list.append(d)
 
-sorted_list = sorted(dict_list, key = lambda d: (area_ordering(d['Area']),
+sorted_list = sorted(dict_list, key = lambda d: (subject_ordering(d['Subject']),
+                                                 area_ordering(d['Area']),
                                                  d['Year'],
                                                  sort_semester(d['Semester']),
-                                                 sort_ordinary(d['Ordinary']),
-                                                 sort_department(d['Department'])))
+                                                 sort_ordinary(d['Ordinary'])))
 
 
 ## Build output
 
+current_subject = None
 current_area = None
 output = []
 indent = '  '
 
 ## Initial text
 
-init_text = """<p>
+init_text = """//h2;Coursework
+<p>
   The letter next to the course name indicates the grade I received for the course. A &lsquo;P&rsquo; indicates a pass. An asterisk indicates that I audited the course and did not receive a grade.
 </p>"""
 output.append(init_text)
 
 # For TOC
-area_list = []
-area_id_list = []
+# area_list = []
+# area_id_list = []
 
 for idx, d in enumerate(sorted_list):
     course = d['English']
@@ -123,8 +133,10 @@ for idx, d in enumerate(sorted_list):
     if hidden == 'Yes':
         continue
 
+    subject = d['Subject']
     area = d['Area']
-    area_id = area.replace(' ', '_')
+    area_short = d['Area short']
+    # area_id = area.replace(' ', '_')
     year = int(d['Year'])
     semester = d['Semester']
     institution = d['Institution']
@@ -134,23 +146,42 @@ for idx, d in enumerate(sorted_list):
         grade_format = "P"
     description = d['Content']
 
+    if current_subject != subject:
+        current_subject = subject
+        output.append(f'//h3;{subject}')
+
     if current_area != area:
         current_area = area
-        output.append(f'<h2 id="{area_id}">{area}</h2>')
+        if area:
+            output.append(f'//h4;{area}')
+        # output.append(f'<h2 id="{area_id}">{area}</h2>')
         output.append('<ul class="course_list">')
-        # For TOC
-        area_list.append(area)
-        area_id_list.append(area_id)
+        # # For TOC
+        # area_list.append(area)
+        # area_id_list.append(area_id)
 
 
-    output.append(f'{indent}<li style="--grade: \'{grade_format}\'">')
-    # output.append(f'{2*indent}<span class="course">{course}</span><span class="time">{semester} {year}</span>')
-    output.append(f'{2*indent}<div class="course">{course}</div>')
-    output.append(f'{2*indent}<div class="time_and_place">')
-    output.append(f'{3*indent}<span>{semester} {year}</span>')
-    output.append(f'{3*indent}<span style="padding: 0 3pt">&bull;</span>')
-    output.append(f'{3*indent}<span>{institution}</span>')
+    output.append(f'{indent}<li>')
+    output.append(f'{2*indent}<div>')
+    output.append(f'{3*indent}<div class="grade">{grade_format}</div>')
+    output.append(f'{3*indent}<div class="course">{course}</div>')
     output.append(f'{2*indent}</div>')
+    output.append(f'{2*indent}<div class="time_and_place">')
+    output.append(f'{3*indent}<ul>')
+    output.append(f'{4*indent}<li>{semester} {year}</li>')
+    output.append(f'{4*indent}<li>{institution}</li>')
+    output.append(f'{3*indent}</ul>')
+    output.append(f'{2*indent}</div>')
+
+
+    # output.append(f'{indent}<li style="--grade: \'{grade_format}\'">')
+    # # output.append(f'{2*indent}<span class="course">{course}</span><span class="time">{semester} {year}</span>')
+    # output.append(f'{2*indent}<div class="course">{course}</div>')
+    # output.append(f'{2*indent}<div class="time_and_place">')
+    # output.append(f'{3*indent}<span>{semester} {year}</span>')
+    # output.append(f'{3*indent}<span style="padding: 0 3pt">&bull;</span>')
+    # output.append(f'{3*indent}<span>{institution}</span>')
+    # output.append(f'{2*indent}</div>')
 
     # Course description
     output.append(f'{2*indent}<div class="description">{description}</div>')
@@ -172,21 +203,21 @@ for idx, d in enumerate(sorted_list):
 
 output = '\n'.join(output)
 
-# Build TOC
+# # Build TOC
 
-toc = []
-toc.append('<div id="toc">')
-toc.append(f'{indent}<h2>Contents</h2>')
-toc.append(f'{indent}<ol>')
+# toc = []
+# toc.append('<div id="toc">')
+# toc.append(f'{indent}<h2>Contents</h2>')
+# toc.append(f'{indent}<ol>')
 
-for i in range(len(area_list)):
-    toc.append(f'{2*indent}<li><a href="#{area_id_list[i]}" class="toclink">{area_list[i]}</a></li>')
+# for i in range(len(area_list)):
+#     toc.append(f'{2*indent}<li><a href="#{area_id_list[i]}" class="toclink">{area_list[i]}</a></li>')
 
-toc.append(f'{indent}</ol>')
-toc.append('</div>')
+# toc.append(f'{indent}</ol>')
+# toc.append('</div>')
 
-toc = '\n'.join(toc)
-output = toc + '\n' + output
+# toc = '\n'.join(toc)
+# output = toc + '\n' + output
 
 # Write output
 

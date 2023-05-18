@@ -528,3 +528,58 @@ manocilettidigitaldesign:
   isbn: '978-1-292-23116-7'
   pagetotal: 710
   edition: 6
+follandharmonicanalysis:
+  type: book
+  title: A Course in Abstract Harmonic Analysis
+  author:
+  - firstname: Gerald B.
+    lastname: Folland
+  year: 2016
+  publisher: CRC Press
+  isbn: 978-1-4987-2715-0
+  pagetotal: 305
+  edition: 2
+follandrealanalysis:
+  type: book
+  title: Real Analysis
+  author:
+  - firstname: Gerald B.
+    lastname: Folland
+  year: 1999
+  publisher: 'John Wiley & Sons, Inc.'
+  isbn: 0-471-31716-0
+  pagetotal: 386
+  edition: 2
+evanspde:
+  type: book
+  title: Partial Differential Equations
+  author:
+  - firstname: Lawrence C.
+    lastname: Evans
+  year: 2010
+  publisher: American Mathematical Society
+  isbn: 978-0-8218-4974-3
+  pagetotal: 749
+  edition: 2
+grubbdistributions:
+  type: book
+  title: Distributions and Operators
+  author:
+  - firstname: Gerd
+    lastname: Grubb
+  year: 2009
+  publisher: Springer
+  isbn: 978-0-387-84894-5
+  pagetotal: 461
+  edition: 1
+strichartzdistributions:
+  type: book
+  title: A Guide to Distribution Theory and Fourier Transforms
+  author:
+  - firstname: Robert
+    lastname: Strichartz
+  year: 1994
+  publisher: CRC Press
+  isbn: 0-8493-8273-4
+  pagetotal: 213
+  edition: 1

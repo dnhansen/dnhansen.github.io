@@ -1,62 +1,50 @@
-.description {
-  font-size: 18px;
-}
-
-.literature {
-  font-size: 16px;
-}
-
 ul.course_list {
   list-style-type: none;
 }
 
-ul.course_list li:before {
+ul.course_list li.grade:before {
   content: var(--grade);
+  font-style: italic;
   margin-right: 5px;
   position: absolute;
   margin-left: -25px;
   text-align: center;
-  font-style: italic;
 }
 
 .course_list li:not(:last-child) {
   margin-bottom: 15px;
 }
 
-table td.ects {
-  text-align: right;
+.description, .literature {
+  font-size: var(--font-size-small);
 }
 
-table td.grade {
+.grade {
+  position: absolute;
+  margin-left: -20px;
+  font-style: italic;
   text-align: center;
 }
 
-th, td {
-  padding: 5px;
-}
-
-table {
-  font-family: 'Crimson Pro', 'Open Sans', Arial;
-  color: #454545;
-  font-size: 18px;
-  margin: 2em auto;
-  max-width: 800px;
-  padding: 1em;
-  line-height: 1.2;
-  text-align: justify
-}
-
-table, th, td {
-  border: 0;
-  border-collapse: collapse;
-}
-
-th {
-  border-bottom: 1px solid #ccc;
-}
-
 .time_and_place {
-  font-family: var(--sans-serif-font);
-  font-size: 14px;
+  font-size: var(--font-size-small);
   color: gray;
+}
+
+.time_and_place ul {
+  padding: 0;
+  margin: 0;
+}
+
+.time_and_place li {
+  display: inline;
+}
+
+.time_and_place li + li:before{
+  content: " | ";
+  padding: 0 5px;
+}
+
+.course {
+  color: var(--color-link)
 }
