@@ -19,6 +19,10 @@ ul.course_list li.grade:before {
   font-size: var(--font-size-small);
 }
 
+.literature {
+  color: gray;
+}
+
 .grade {
   position: absolute;
   margin-left: -20px;
