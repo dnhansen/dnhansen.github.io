@@ -583,3 +583,18 @@ strichartzdistributions:
   isbn: 0-8493-8273-4
   pagetotal: 213
   edition: 1
+linearcircuits:
+  type: book
+  title: The Analysis and Design of Linear Circuits
+  author:
+  - firstname: Roland E.
+    lastname: Thomas
+  - firstname: Albert J.
+    lastname: Rosa
+  - firstname: Gregory J.
+    lastname: Toussaint
+  year: 2016
+  publisher: Wiley
+  isbn: 978-1-119-23538-5
+  pagetotal: 889
+  edition: 8
