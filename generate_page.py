@@ -24,7 +24,7 @@ def format_element(element: Optional[str], indent: str) -> str:
     filetype: str = get_filetype(element)
     match filetype:
         case 'css':
-            return f'{indent}<link rel="stylesheet" type="text/css" href="/{element}">'
+            return f'{indent}<link rel="stylesheet" type="text/css" href="./{element}">'
         case 'js':
             return f'{indent}<script src="{element}"></script>'
         case 'html':
