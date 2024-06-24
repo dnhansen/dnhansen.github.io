@@ -58,21 +58,30 @@ def subject_ordering(s):
              'Physics',
              'Computer science',
              'Electrical engineering')
-    return order.index(s)
+    # return order.index(s)
+    try:
+        return order.index(s)
+    except:
+        print(f"|{s}|")
+        raise ValueError
 
 
 def area_ordering(s):
     order = ('Analysis',
              'Algebra',
              'Geometry',
-             'Statistics',
+             'Probability theory and statistics',
              'Miscellaneous mathematics',
              'Programming',
              'Theoretical computer science',
              'Miscellaneous computer science',
              'Electrical engineering',
              '')
-    return order.index(s)
+    try:
+        return order.index(s)
+    except:
+        print(f"|{s}|")
+        raise ValueError
 
 
 ## I/O

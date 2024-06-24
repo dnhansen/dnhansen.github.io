@@ -598,3 +598,16 @@ linearcircuits:
   isbn: 978-1-119-23538-5
   pagetotal: 889
   edition: 8
+dupontgeometry:
+  type: book
+  title: Differential Geometry
+  author:
+  - firstname: Johan L.
+    lastname: Dupont
+  year: 2003
+  pagetotal: 177
+softwarefoundations:
+  type: book
+  title: Software Foundations
+  author:
+  - lastname: Various authors
