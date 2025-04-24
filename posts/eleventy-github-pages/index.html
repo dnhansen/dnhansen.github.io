@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/toc.css">
+  <link rel="stylesheet" href="/css/posts.css">
+  <link rel="stylesheet" href="/css/code.css">
+  <script type="module" src="/js/main.js"></script>
+  
+    <script type="module" src="/js/toc.js"></script>
+  
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Deploying Eleventy sites to GitHub Pages</title>
+</head>
+<body>
+  <header id="page-header">
+    <div class="header-content">
+      <div class="header-title-container">
+        <span class="header-title">
+          <span class="d">d</span><span class="n">n</span><span class="h">h</span>
+        </span>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/posts/">Posts</a></li>
+          <li><a href="/notes/">Notes</a></li>
+          <li><a href="/resources/">Resources</a></li>
+          <li><a href="https://github.com/dnhansen">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="content-wrapper">
+    <main>
+      
+<article>
+  <header>
+    <h1>Deploying Eleventy sites to GitHub Pages</h2>
+    <div class="post-meta">
+      <p><time datetime="2025-04-24">24 Apr 2025</time></p>
+      <ul class="post-tags">
+        
+          <a href="/posts/?tags=eleventy"><button class="tag-button" data-tag="eleventy">eleventy</button></a>
+        
+          <a href="/posts/?tags=github"><button class="tag-button" data-tag="github">github</button></a>
+        
+          <a href="/posts/?tags=web"><button class="tag-button" data-tag="web">web</button></a>
+        
+      </ul>
+    </div>
+  </header>
+  <p>In which we learn how to deploy statically generated sites to GitHub Pages, while keeping source code in a private repository.</p>
+
+  <h2 id="configuration" tabindex="-1"><a class="header-anchor" href="#configuration">Configuration</a></h2>
+<p>GitHub has made it quite simple to serve static pages. In the simplest case, you would just serve the compiled files from the same repository that contains the source code. But if you e.g. want more control over what goes public when, you need the source code to lie in a private repository, and it is not possible to host GitHub Pages from a private repository without a paid subscription to GitHub.</p>
+<p>Instead we will use two different repositories, say <code>development</code> and <code>production</code>. The former will be a private repository in which we keep our source code, and the compiled pages will be automatically deployed to the latter using GitHub Actions. We could deploy to any branch in the <code>production</code> repository, but it is customary to use the branch <code>gh-pages</code>, and we will do so below. (Of course, not having to keep compiled code under version control is another good reason to use a two-repository setup.)</p>
+<h3 id="create-a-deployment-key-pair" tabindex="-1"><a class="header-anchor" href="#create-a-deployment-key-pair">Create a deployment key pair</a></h3>
+<p>In order to allow <code>development</code> to push to <code>production</code>, we must set up an asymmetric key pair to allow the former to authenticate itself to the latter. In a one-repository setup it would suffice to use <code>GITHUB_TOKEN</code> by giving it the proper permissions, but since this cannot gain permission to push to <em>other</em> repositories, we must configure a key pair manually.</p>
+<p>To this end we use a <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys"><strong>deploy key</strong></a>. This enables one repository to either fetch or pull from another, depending on the permissions given. Perform the following steps:</p>
+<ol>
+<li>
+<p>Generate an asymmetric key pair using your favourite secure key generator.</p>
+</li>
+<li>
+<p>Add the public key to <code>production</code> as a deploy key: In <code>production</code>, go to ‘Settings’ and then to ‘Deploy keys’ in the left-hand menu. Click ‘Add deploy key’ and paste the <em>public</em> key into the ‘Key’ field. Remember to check the box ‘Allow write access’.</p>
+</li>
+<li>
+<p>Add the private key to <code>development</code> as a secret: In <code>development</code>, go to ‘Settings’, then ‘Secrets and variables’, then ‘Actions’. Click ‘New repository secret’ and paste the <em>private</em> key into the ‘Secret’ field. Give the key a descriptive name, like <code>ACTIONS_DEPLOY_KEY</code>.</p>
+</li>
+</ol>
+<p>When deploying using GitHub Actions, we pass the private key to the action performing the deployment, as we will see <a href="#writing-a-github-actions-workflow">below</a>.</p>
+<h3 id="configure-eleventy" tabindex="-1"><a class="header-anchor" href="#configure-eleventy">Configure Eleventy</a></h3>
+<p>When developing our site we do not want to make any assumptions about where it will be hosted, that is, whether it will be hosted at the root of a server or at some subdirectory. Sometimes this requires decorating every internal URL with a filter that can inject the path to the directory to which which the site will be deployed. In Eleventy this path is called the <a href="https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix"><strong>path prefix</strong></a>, and it is available either via the <code>--pathprefix</code> command line option, or the <code>pathPrefix</code> key of the configuration file return object. The former is particularly useful if we want the path prefix to differ between the development and production environments.</p>
+<p>When it comes to injecting the path prefix into URLs, Eleventy can take care of this for us with the <a href="https://www.11ty.dev/docs/plugins/html-base/">HTML <code>&lt;base&gt;</code> plugin</a>. Simply add the following to the Eleventy configuration file:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> HtmlBasePlugin <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@11ty/eleventy"</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    eleventyConfig<span class="token punctuation">.</span><span class="token function">addPlugin</span><span class="token punctuation">(</span>HtmlBasePlugin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>By default, the plugin injects the path prefix into URLs, but other paths can be specified by passing an options object to <code>addPlugin</code>.</p>
+<p>Finally, to specify said path prefix, we define a script in <code>package.json</code> which will later be run by our GitHub Actions workflow:</p>
+<pre class="language-json"><code class="language-json"><span class="token property">"build-ghpages"</span><span class="token operator">:</span> <span class="token string">"npx @11ty/eleventy --pathprefix=production"</span>
+</code></pre>
+<p>Of course, change ‘<code>production</code>’ to the name of your own production repository, or omit the option entirely if the site is going to be deployed to your GitHub Pages homepage (i.e., if the <code>production</code> repository is <code class="language-undefined"><mark class="highlight">username</mark>.github.io</code>).</p>
+<h3 id="writing-a-github-actions-workflow" tabindex="-1"><a class="header-anchor" href="#writing-a-github-actions-workflow">Writing a GitHub Actions workflow</a></h3>
+<p>Compilation and deployment will be handled by a GitHub Actions workflow. Our workflow should trigger on push to the <code>main</code> branch of <code>development</code>, and maybe on pull requests or other events depending on your development process. When triggered, the workflow should run a job that performs the following actions:</p>
+<ol>
+<li>
+<p>Checkout the <code>development</code> repository.</p>
+</li>
+<li>
+<p>Setup Node. The <a href="https://github.com/actions/setup-node"><code>actions/setup-node</code></a> action has support for caching, so we enable this here.</p>
+</li>
+<li>
+<p>Persist the Eleventy cache using the <a href="https://github.com/actions/cache"><code>actions/cache</code></a> action.</p>
+</li>
+<li>
+<p>Install Node dependencies.</p>
+</li>
+<li>
+<p>Run the <code>build-ghpages</code> script.</p>
+</li>
+<li>
+<p>Deploy to the <code>gh-pages</code> branch of <code>production</code> using the <a href="https://github.com/peaceiris/actions-gh-pages"><code>peaceiris/actions-gh-pages</code></a> action. This will need to be passed the deploy key we generated above.</p>
+</li>
+</ol>
+<p>In total, the workflow will look something like this, modified from <a href="https://www.11ty.dev/docs/deployment/#deploy-an-eleventy-project-to-git-hub-pages">the Eleventy documentation</a>:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">name</span><span class="token punctuation">:</span> Deploy to GitHub Pages
+<span class="token key atrule">on</span><span class="token punctuation">:</span>
+  <span class="token key atrule">push</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branches</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> main
+<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
+    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v4
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Setup Node
+        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>node@v4
+        <span class="token key atrule">with</span><span class="token punctuation">:</span>
+          <span class="token key atrule">node-version</span><span class="token punctuation">:</span> <span class="token number">18</span>
+          <span class="token key atrule">cache</span><span class="token punctuation">:</span> <span class="token string">"npm"</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Persist Eleventy .cache
+        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/cache@v4
+        <span class="token key atrule">with</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> ./.cache
+          <span class="token key atrule">key</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> runner.os <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">-</span>eleventy<span class="token punctuation">-</span>fetch<span class="token punctuation">-</span>cache
+      <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm install
+      <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm run build<span class="token punctuation">-</span>ghpages
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Deploy
+        <span class="token key atrule">uses</span><span class="token punctuation">:</span> peaceiris/actions<span class="token punctuation">-</span>gh<span class="token punctuation">-</span>pages@v4
+        <span class="token key atrule">with</span><span class="token punctuation">:</span>
+          <span class="token key atrule">deploy_key</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.ACTIONS_DEPLOY_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
+          <span class="token key atrule">external_repository</span><span class="token punctuation">:</span> <mark class="highlight">username</mark>/production
+          <span class="token key atrule">publish_branch</span><span class="token punctuation">:</span> gh<span class="token punctuation">-</span>pages
+          <span class="token key atrule">publish_dir</span><span class="token punctuation">:</span> ./_site
+</code></pre>
+<p>Of course, modify this workflow to suit your needs, e.g. if you use a different Node package manager, or if Eleventy outputs to a different directory. You may also want to place concurrency restrictions on the workflow.</p>
+<h2 id="hosting" tabindex="-1"><a class="header-anchor" href="#hosting">Hosting</a></h2>
+<p>Pushing to <code>development</code> will then trigger the workflow, and your site will be compiled and deployed to <code>production</code>. This will in particular create a <code>gh-pages</code> branch if it does not already exist. The only thing left is to enable hosting on the <code>production</code> repository:</p>
+<ol>
+<li>
+<p>From the repository view, navigate to the ‘Settings’ tab and then to ‘Pages’ in the left-hand menu.</p>
+</li>
+<li>
+<p>Under ‘Source’ select ‘Deploy from a branch’.</p>
+</li>
+<li>
+<p>Under ‘Branch’ select <code>gh-pages</code> and the folder <code>/ (root)</code>, and click ‘Save’.</p>
+</li>
+</ol>
+<h2 id="a-note-on-typescript" tabindex="-1"><a class="header-anchor" href="#a-note-on-typescript">A note on TypeScript</a></h2>
+<p>If you write your scripts in TypeScript, you also need to compile to JavaScript as part of this workflow. You can obviously modify the workflow itself, but if you are using npm you can also use a <code>pre</code> script by adding the following script to <code>package.json</code>:</p>
+<pre class="language-json"><code class="language-json"><span class="token property">"prebuild-ghpages"</span><span class="token operator">:</span> <span class="token string">"tsc"</span>
+</code></pre>
+<p>The prefix <code>pre</code> will cause this script to be run automatically before <code>build-ghpages</code>.</p>
+<p>Note that <code>pre</code> (and <code>post</code>) scripts should be used with caution, since the resulting behaviour is not explicit. See <a href="https://docs.npmjs.com/cli/v8/using-npm/scripts">the npm documentation</a> for more information, as well as the corresponding page of <a href="https://yarnpkg.com/advanced/lifecycle-scripts">the Yarn documentation</a> for an example of a package manager that does not support <code>pre</code> scripts.</p>
+
+</article>
+    </main>
+    <div id="right-sidebar" class="sidebar">
+      
+        <nav>
+          <h2 class="toc-header">Contents</h2>
+          <div class="table-of-contents"><ul><li><a href="#configuration">Configuration</a><ul><li><a href="#create-a-deployment-key-pair">Create a deployment key pair</a></li><li><a href="#configure-eleventy">Configure Eleventy</a></li><li><a href="#writing-a-github-actions-workflow">Writing a GitHub Actions workflow</a></li></ul></li><li><a href="#hosting">Hosting</a></li><li><a href="#a-note-on-typescript">A note on TypeScript</a></li></ul></div>
+        </nav>
+      
+      
+    </div>
+  </div>
+  <footer id="page-footer">
+    <div class="footer-content">
+      <div class="footer-copyright">Copyright © 2025 Danny Nygård Hansen</div>
+      <div class="footer-made-with">Made with <a href="https://www.11ty.dev/">Eleventy</a> and <a href="/about/this-page/">friends</a></div>
+    </div>
+  </footer>
+</body>
+</html>
