@@ -1,0 +1,77 @@
+/* Post list */
+
+.post-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-list h2 a {
+    color: var(--header-text-color);
+}
+
+
+/* Post headers */
+
+article header {
+    font-family: var(--heading-font);
+}
+
+.post-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.post-meta * {
+    margin-bottom: 0;
+}
+
+.post-meta time {
+    font-size: 90%;
+}
+
+.post-tags {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    gap: 10px;
+}
+
+.tag-button {
+    background-color: var(--tag-button-color);
+    color: white;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-size: 75%;
+    font-family: var(--heading-font);
+}
+
+.tag-button:hover {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* Tag sidebar */
+
+.tag-list {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    gap: 10px;
+}
+
+.tag-list label {
+    transition: color 0.1s linear;
+}
+
+.tag-list label:hover {
+    color: var(--toc-link-highlight-color);
+    cursor: pointer;
+}
+
+.tag-list label input:hover {
+    cursor: pointer;
+}

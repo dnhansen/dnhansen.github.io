@@ -1,0 +1,28 @@
+.toc-header {
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.table-of-contents ul {
+    list-style-type: none;
+    padding-left: 1em;
+    margin-top: 0;
+}
+
+.table-of-contents > ul {
+    padding: 0;
+}
+
+.table-of-contents a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.1s linear;
+}
+
+.table-of-contents a:hover {
+    color: var(--toc-link-highlight-color);
+}
+
+.table-of-contents a.active {
+    color: var(--toc-active-section-color);
+}
