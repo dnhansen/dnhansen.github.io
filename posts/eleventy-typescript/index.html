@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/toc.css">
+  <link rel="stylesheet" href="/css/posts.css">
+  <link rel="stylesheet" href="/css/code.css">
+  <script type="module" src="/js/main.js"></script>
+  
+    <script type="module" src="/js/toc.js"></script>
+  
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>Using TypeScript with Eleventy</title>
+</head>
+<body>
+  <header id="page-header">
+    <div class="header-content">
+      <div class="header-title-container">
+        <span class="header-title">
+          <span class="d">d</span><span class="n">n</span><span class="h">h</span>
+        </span>
+      </div>
+      <nav class="header-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/posts/">Posts</a></li>
+          <li><a href="/notes/">Notes</a></li>
+          <li><a href="/resources/">Resources</a></li>
+          <li><a href="https://github.com/dnhansen">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="content-wrapper">
+    <main>
+      
+<article>
+  <header>
+    <h1>Using TypeScript with Eleventy</h2>
+    <div class="post-meta">
+      <p><time datetime="2025-04-25">25 Apr 2025</time></p>
+      <ul class="post-tags">
+        
+          <a href="/posts/?tags=eleventy"><button class="tag-button" data-tag="eleventy">eleventy</button></a>
+        
+          <a href="/posts/?tags=typescript"><button class="tag-button" data-tag="typescript">typescript</button></a>
+        
+          <a href="/posts/?tags=web"><button class="tag-button" data-tag="web">web</button></a>
+        
+      </ul>
+    </div>
+  </header>
+  <p>In which we create a workflow for using TypeScript to write client-side scripts with Eleventy.</p>
+
+  <h2 id="the-problem" tabindex="-1"><a class="header-anchor" href="#the-problem">The problem</a></h2>
+<p>When developing with Eleventy, passing the option <code>--watch</code> to the <code>eleventy</code> command very convenienty watches the source directory for changes and builds these automatically. For templates under the control of Eleventy itself, or for files that should simply be passed through, this works as it should.</p>
+<p>However, while Eleventy has support for TypeScript in <em>front matter</em>, it has no built-in integration with the TypeScript compiler that automatically runs the compiler on <code>.ts</code> files and passes through the compiled JavaScript. Hence we must run both Eleventy and the TypeScript compiler ourselves.</p>
+<h2 id="the-solution" tabindex="-1"><a class="header-anchor" href="#the-solution">The solution</a></h2>
+<p>We thus run Eleventy and the TypeScript compiler in parallel. The TypeScript compiler watches for changes in the source files and compiles them as appropriate, outputting them to an intermediary directory. Eleventy in turn watches said directory and passes through copies of the files.</p>
+<h3 id="configuring-the-typescript-compiler" tabindex="-1"><a class="header-anchor" href="#configuring-the-typescript-compiler">Configuring the TypeScript compiler</a></h3>
+<p>After installing TypeScript, place a <code>tsconfig.json</code> file in the root folder of the project. Along with your favourite compiler options, this should contain the following:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"compilerOptions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"outDir"</span><span class="token operator">:</span> <span class="token string">"build/js"</span><span class="token punctuation">,</span>
+    <span class="token property">"rootDir"</span><span class="token operator">:</span> <span class="token string">"<mark class="highlight">input</mark>/scripts"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"include"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"<mark class="highlight">input</mark>/scripts"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Here, <code class="language-undefined"><mark class="highlight">input</mark></code> is the <a href="https://www.11ty.dev/docs/config/#input-directory">Eleventy input directory</a>, which by default is <code>.</code>. Of course, change the values of the options to suit your environment.</p>
+<h3 id="configuring-eleventy" tabindex="-1"><a class="header-anchor" href="#configuring-eleventy">Configuring Eleventy</a></h3>
+<p>The configuration API can be used to specify that <code>.js</code> files should be <a href="https://www.11ty.dev/docs/copy/#configuration-api-method">passed through to the output</a> of Eleventy. Add the following to the exported function in the <a href="https://www.11ty.dev/docs/config/">Eleventy configuration file</a>:</p>
+<pre class="language-js"><code class="language-js">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">"build"</span><span class="token operator">:</span> <span class="token string">"."</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>This will copy all files in the <code>build</code> directory, preserving the directory structure. In particular, the output JavaScript files (which were placed in <code>build/js</code>) will be output to the <code>js</code> subfolder.</p>
+<p>Of course, the <code>build</code> folder might for some reason contain files that should not be passed through, for instance <code>.d.ts</code> files produced by the TypeScript compiler. We are thus tempted to modify the function above to something like:</p>
+<pre class="language-js"><code class="language-js">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">"build/**/*.js"</span><span class="token operator">:</span> <span class="token string">"."</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Sadly, this <a href="https://www.11ty.dev/docs/copy/#using-globs-and-output-directories">does not preserve the directory structure</a> of the <code>build</code> folder, but instead places everything in the root of the output directory. Luckily, Eleventy by default supports <a href="https://www.npmjs.com/package/recursive-copy">the recursive-copy package</a>, which allows us to instead filter which files should be copied:</p>
+<pre class="language-js"><code class="language-js">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">"build"</span><span class="token operator">:</span> <span class="token string">"."</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token string">"**/*.js"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The syntax can be gleaned from <a href="https://www.11ty.dev/docs/copy/#advanced-options">the Eleventy documentation</a>. Note that the <code>filter</code> option also accepts arrays, so if we wanted to also pass through JavaScript module files, we could configure the filter as follows:</p>
+<pre class="language-js"><code class="language-js">eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">"build"</span><span class="token operator">:</span> <span class="token string">"."</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"**/*.js"</span><span class="token punctuation">,</span> <span class="token string">"**/*.mjs"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Finally, say we want to control which files get passed through depending on the environment, say whether the application is run in development or production. Useful environment variables are exposed by Node.js under <a href="https://nodejs.org/api/process.html#process_process_env">the <code>process.env</code> object</a>, and <a href="https://www.11ty.dev/docs/environment-vars/#eleventy-supplied">Eleventy supplies additional variables</a> on the same object.</p>
+<p>Of note are the <code>NODE_ENV</code> and <code>ELEVENTY_RUN_MODE</code> variables, though none of these are ideal: The former is usually considered <a href="https://nodejs.org/en/learn/getting-started/nodejs-the-difference-between-development-and-production">an antipattern</a>, while the latter does not explicitly distinguish between development and production. While running Eleventy in <code>watch</code> mode is not suitable for a production environment, running it in <code>build</code> mode <em>can</em> be suitable for development.</p>
+<p>To use either, just wrap the call to <code>addPassthroughCopy</code> in an if-statement:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">ELEVENTY_RUN_MODE</span> <span class="token operator">!==</span> <span class="token string">"build"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">"build"</span><span class="token operator">:</span> <span class="token string">"."</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token string">"**/*.d.ts"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This will pass through <code>.d.ts</code> files whenever Eleventy is <em>not</em> run in <code>build</code> mode.</p>
+<h3 id="running-in-parallel" tabindex="-1"><a class="header-anchor" href="#running-in-parallel">Running in parallel</a></h3>
+<p>To simultaneously run the TypeScript compiler and Eleventy, we use <a href="https://www.npmjs.com/package/npm-run-all">the npm-run-all package</a>. After installing this package, add the following to <code>package.json</code>:</p>
+<pre class="language-json"><code class="language-json"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"watch:ts"</span><span class="token operator">:</span> <span class="token string">"tsc --watch --preserveWatchOutput"</span><span class="token punctuation">,</span>
+    <span class="token property">"watch:eleventy"</span><span class="token operator">:</span> <span class="token string">"eleventy --watch --quiet"</span><span class="token punctuation">,</span>
+    <span class="token property">"watch"</span><span class="token operator">:</span> <span class="token string">"npm-run-all --parallel watch:ts watch:eleventy"</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<p>Usually, the Eleventy output is fairly verbose, so the <code>--quiet</code> option is useful for not clogging the terminal. On the other hand the <code>--preserveWatchOutput</code> option to the TypeScript compiler is almost mandatory, since the compiler by default erases all prior output to the terminal when in <code>--watch</code> mode.</p>
+<p>Then simply run <code>npm run watch</code>.</p>
+
+</article>
+    </main>
+    <div id="right-sidebar" class="sidebar">
+      
+        <nav>
+          <h2 class="toc-header">Contents</h2>
+          <div class="table-of-contents"><ul><li><a href="#the-problem">The problem</a></li><li><a href="#the-solution">The solution</a><ul><li><a href="#configuring-the-typescript-compiler">Configuring the TypeScript compiler</a></li><li><a href="#configuring-eleventy">Configuring Eleventy</a></li><li><a href="#running-in-parallel">Running in parallel</a></li></ul></li></ul></div>
+        </nav>
+      
+      
+    </div>
+  </div>
+  <footer id="page-footer">
+    <div class="footer-content">
+      <div class="footer-copyright">Copyright © 2025 Danny Nygård Hansen</div>
+      <div class="footer-made-with">Made with <a href="https://www.11ty.dev/">Eleventy</a> and <a href="/about/this-page/">friends</a></div>
+    </div>
+  </footer>
+</body>
+</html>
