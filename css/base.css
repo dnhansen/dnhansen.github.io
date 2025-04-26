@@ -18,42 +18,32 @@
     --header-font: "Source Sans 3";
     --heading-font: var(--header-font);
     --sidebar-font: var(--header-font);
+    --table-font: var(--header-font);
     --toc-header-font: var(--header-font);
     --code-font: "Fira Code";
 
     --background-color: rgb(30,33,41);
     --text-color: rgb(233,237,252);
+    --heading-color: var(--text-color);
+    --heading-underline-color: rgb(66, 66, 66);
     --link-color: #569cd6;
-    /* --link-color: rgb(82,108,254); */
     --code-color: #d4d4d4;
-    /* --code-color: rgb(182,185,195); */
     --code-background-color: rgb(39,42,53);
-    --toc-header-color: rgb(140,142,149);
-    --toc-link-highlight-color: var(--link-color);
-    --toc-active-section-color: var(--toc-link-highlight-color);
-    /* --tag-button-color: rgb(42, 57, 140); */
+
+    --logo-main-color: var(--text-color);
+    --logo-highlight-color: var(--link-color);
+    --header-text-color: var(--text-color);
+    --footer-text-color: rgb(189,189,189);
+    --sidebar-heading-color: rgb(140, 142, 149);
+    --sidebar-text-color: var(--text-color);
+
     --tag-button-color: rgb(46, 65, 138);
+    --tag-button-text-color: var(--text-color);
 
-
-
-    --header-text-color: rgb(189,189,189);
-    --border-color: rgb(66, 66, 66);
-    --current-page-border-color: #8cb4ff;
-    --sidebar-category-color: #868686;
-    --view-description-color: #868686;
-
-    --button-background-color: rgb(233,233,237);
-    --button-background-color-hover: rgb(208,208,215);
-    --button-text-color: rgb(0,0,0);
-    --button-border-color: rgb(143,143,157);
-    --button-border-color-hover: rgb(103,103,116);
-
-    --table-background-color: #eef4f7;
-    --table-header-color: #595959;
-    --table-code-background-color: #e4eef1;
-    --table-code-color: #717170;
-
-    --chevron-color: black;
+    --table-background-color: var(--code-background-color);
+    --table-code-background-color: rgb(49, 53, 66);
+    --table-header-color: var(--sidebar-heading-color);
+    --table-code-color: var(--code-color);
 }
 
 
@@ -120,7 +110,7 @@ main {
     padding: 0;
     background-color: rgb(20,21,26);
     box-shadow: 0 0 .2rem #0000001a,0 .2rem .4rem #0003;
-    color: var(--header-text-color);
+    /* color: var(--header-text-color); */
     font-family: var(--header-font);
 }
 
@@ -130,7 +120,7 @@ main {
 }
 
 .header-title {
-    color: var(--text-color);
+    color: var(--logo-main-color);
     font-size: 225%;
     padding-bottom: 11.2px;
     font-family: "Zen Tokyo Zoo";
@@ -142,11 +132,11 @@ main {
 }
 
 .header-title .d {
-    color: var(--link-color);
+    color: var(--logo-highlight-color);
 }
 
 #page-header a {
-    color: var(--text-color);
+    color: var(--header-text-color);
     text-decoration: none;
     transition: color 0.1s linear;
 }
@@ -182,7 +172,7 @@ main {
 #page-footer {
     background-color: rgb(20,21,26);
     font-size: 90%;
-    color: var(--header-text-color);
+    color: var(--footer-text-color);
     font-family: var(--header-font);
 }
 
@@ -215,8 +205,8 @@ main {
 
 .sidebar h2 {
     border: 0pt;
-    color: var(--toc-header-color);
-    font-family: var(--toc-header-font);
+    color: var(--sidebar-heading-color);
+    font-family: var(--sidebar-font);
     font-size: 16px;
     margin-top: 10px;
 }
@@ -251,11 +241,11 @@ h1 {
 }
 
 h2 {
-    border-bottom: solid 1px var(--border-color);
+    border-bottom: solid 1px var(--heading-underline-color);
 }
 
 .header-anchor {
-    color: var(--text-color);
+    color: var(--heading-color);
 }
 
 .header-anchor::before {
@@ -354,4 +344,34 @@ mark.comment {
     font-family: var(--body-font);
     font-size: 18px;
     font-style: italic;
+}
+
+
+/* Tables */
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    background-color: var(--table-background-color);
+    border-radius: 3px;
+    padding: 0.3em 0.5em;
+    font-family: var(--table-font);
+    font-size: 16px;
+}
+
+thead {
+    color: var(--table-header-color);
+    font-size: 80%;
+    text-transform: uppercase;
+}
+
+table code {
+    background-color: var(--table-code-background-color);
+    color: var(--table-code-color);
+    font-size: 90%;
+}
+
+th, td {
+    text-align: left;
 }
